@@ -275,18 +275,18 @@
 </div>
 
 <script>
-    // Link oficial fornecido inserido com sucesso
+    // Link oficial da sua planilha injetado
     const URL_PLANILHA = 'https://google.com';
 
     document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Impede o recarregamento automático padrão da página
         
         const btn = document.getElementById('btnEnviar');
         btn.disabled = true;
         btn.innerText = 'Enviando...';
 
-        // Captura e formata itens marcados de múltiplos valores
+        // Captura itens checados
         const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
         const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
 
-        // Cria o formato URL encoded que não causa erros de CORS ou funções ausentes no Google
+        const dadosFormulario = {
