@@ -58,7 +58,7 @@
             font-size: 24px;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            text-transform: uppercase; /* Altera estritamente o título principal para Caixa Alta */
+            text-transform: uppercase;
         }
 
         p.subtitle {
@@ -159,6 +159,12 @@
             border-bottom: 3px solid var(--primary-red);
         }
 
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            border-bottom: none;
+        }
+
         @media (max-width: 600px) {
             .form-row {
                 flex-direction: column;
@@ -207,7 +213,7 @@
             <select id="local" required>
                 <option value="">Selecione o local...</option>
                 <option value="Auditório">Auditório</option>
-                <option value="Sala de Reunião">Sala de Reuniões</option>
+                <option value="Sala de Reunião">Sala de Reunião</option>
                 <option value="Pátio de Formatura">Pátio de Formatura</option>
                 <option value="Outro">Outro (Especificar nas observações)</option>
             </select>
@@ -259,12 +265,17 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <button type="button" id="btnEnviar" onclick="processarFormulario()">Enviar Solicitação</button>
+        <button type="button" id="btnEnviar" onclick="enviarFormularioPorEmail()">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
-    function processarFormulario() {
+    // ⚠️ SUBSTITUA O TEXTO ABAIXO PELA SUA CHAVE QUE CHEGOU NO SEU E-MAIL
+    const CHAVE_WEB3FORMS = '8b5fb2ca-3448-456f-b1c5-4711d51aeefe';
+
+    function enviarFormularioPorEmail() {
+        const btn = document.getElementById('btnEnviar');
+        
         const nome = document.getElementById('nome').value.trim();
         const setor = document.getElementById('setor').value.trim();
         const evento = document.getElementById('evento').value.trim();
@@ -273,14 +284,12 @@
         const local = document.getElementById('local').value;
 
         if (!nome || !setor || !evento || !data || !horario || !local) {
-            alert('Por favor, preencha todos os campos obrigatórios antes de enviar.');
+            alert('Por favor, preencha todos os campos obrigatórios.');
             return;
         }
 
-        alert('Solicitação enviada com sucesso! A equipe de TI/Som analisará o seu pedido.');
-        document.getElementById('solicitacaoForm').reset();
-    }
-</script>
+        btn.disabled = true;
+        btn.innerText = 'Enviando...';
 
-</body>
-</html>
+        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
+        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
