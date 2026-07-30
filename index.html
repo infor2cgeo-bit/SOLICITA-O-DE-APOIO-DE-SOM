@@ -181,36 +181,43 @@
         <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de equipamentos e suporte para o evento.</p>
     </header>
 
-    <form id="solicitacaoForm" onsubmit="return false;">
+    <!-- Envio HTML nativo acoplado à API estável do Web3Forms com target isolado -->
+    <form id="solicitacaoForm" action="https://web3forms.com" method="POST" target="canal_invisivel">
+        
+        <!-- ⚠️ SUBSTITUA O TEXTO ABAIXO PELA SUA CHAVE QUE VOCÊ COPIOU DO SITE WEB3FORMS -->
+        <input type="hidden" name="access_key" value="COLE_AQUI_A_SUA_CHAVE_DO_WEB3FORMS">
+        <input type="hidden" name="subject" value="Nova Solicitação de Apoio - Sistema de Chamados">
+        <input type="hidden" name="from_name" value="Formulário TI/Som">
+
         <div class="form-group">
             <label for="nome">Nome de Guerra</label>
-            <input type="text" id="nome" required placeholder="Digite seu nome de guerra">
+            <input type="text" id="nome" name="Nome de Guerra" required placeholder="Digite seu nome de guerra">
         </div>
 
         <div class="form-group">
             <label for="setor">Seção</label>
-            <input type="text" id="setor" required placeholder="Ex: S1, S3, Almoxarifado">
+            <input type="text" id="setor" name="Seção" required placeholder="Ex: S1, S3, Almoxarifado">
         </div>
 
         <div class="form-group">
             <label for="evento">Nome do Evento</label>
-            <input type="text" id="evento" required placeholder="Ex: Palestra de Integração">
+            <input type="text" id="evento" name="Nome do Evento" required placeholder="Ex: Palestra de Integração">
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="data">Data do Evento</label>
-                <input type="date" id="data" required>
+                <input type="date" id="data" name="Data do Evento" required>
             </div>
             <div class="form-group">
                 <label for="horario">Horário de Início</label>
-                <input type="time" id="horario" required>
+                <input type="time" id="horario" name="Horário de Início" required>
             </div>
         </div>
 
         <div class="form-group">
             <label for="local">Local do Evento</label>
-            <select id="local" required>
+            <select id="local" name="Local do Evento" required>
                 <option value="">Selecione o local...</option>
                 <option value="Auditório">Auditório</option>
                 <option value="Sala de Reunião">Sala de Reunião</option>
@@ -223,13 +230,13 @@
             <label>Necessidades de Som</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="Microfones Sem Fio"> Microfones Sem Fio
+                    <input type="checkbox" name="Necessidade Som (Microfone)" value="Microfones Sem Fio"> Microfones Sem Fio
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="Caixas de Som"> Caixas de Som
+                    <input type="checkbox" name="Necessidade Som (Caixa)" value="Caixas de Som"> Caixas de Som
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="Mesa de Som Dedicada"> Mesa de Som Dedicada
+                    <input type="checkbox" name="Necessidade Som (Mesa)" value="Mesa de Som Dedicada"> Mesa de Som Dedicada
                 </label>
             </div>
         </div>
@@ -238,23 +245,23 @@
             <label>Necessidades de Informática</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="Projetor"> Projetor
+                    <input type="checkbox" name="Necessidade TI (Projetor)" value="Projetor"> Projetor
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="Notebook para Apresentação"> Notebook para Apresentação
+                    <input type="checkbox" name="Necessidade TI (Notebook)" value="Notebook para Apresentação"> Notebook para Apresentação
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="Passador de Slides"> Passador de Slides (Laser)
+                    <input type="checkbox" name="Necessidade TI (Passador)" value="Passador de Slides"> Passador de Slides (Laser)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="Ponto de Internet Cabeada"> Ponto de Internet Cabeada
+                    <input type="checkbox" name="Necessidade TI (Internet)" value="Ponto de Internet Cabeada"> Ponto de Internet Cabeada
                 </label>
             </div>
         </div>
 
         <div class="form-group">
             <label for="tecnico">Necessita de Técnico no Local durante o evento?</label>
-            <select id="tecnico" required>
+            <select id="tecnico" name="Necessita de Técnico" required>
                 <option value="Não, apenas a montagem/testes iniciais">Não, apenas a montagem/testes iniciais</option>
                 <option value="Sim, suporte durante todo o evento">Sim, suporte durante todo o evento</option>
             </select>
@@ -262,34 +269,15 @@
 
         <div class="form-group">
             <label for="obs">Observações ou Detalhes Adicionais</label>
-            <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
+            <textarea id="obs" name="Observações Adicionais" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <button type="button" id="btnEnviar" onclick="enviarFormularioPorEmail()">Enviar Solicitação</button>
+        <!-- Botão submit ativa obrigatoriamente a ação nativa e blindada do formulário -->
+        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
     </form>
 </div>
 
+<!-- O iframe absorve a resposta da rede e impede o site principal de recarregar ou sair do lugar -->
+<iframe name="canal_invisivel" id="canal_invisivel" style="display:none;"></iframe>
+
 <script>
-    // ⚠️ SUBSTITUA O TEXTO ABAIXO PELA SUA CHAVE QUE CHEGOU NO SEU E-MAIL
-    const CHAVE_WEB3FORMS = '8b5fb2ca-3448-456f-b1c5-4711d51aeefe';
-
-    function enviarFormularioPorEmail() {
-        const btn = document.getElementById('btnEnviar');
-        
-        const nome = document.getElementById('nome').value.trim();
-        const setor = document.getElementById('setor').value.trim();
-        const evento = document.getElementById('evento').value.trim();
-        const data = document.getElementById('data').value;
-        const horario = document.getElementById('horario').value;
-        const local = document.getElementById('local').value;
-
-        if (!nome || !setor || !evento || !data || !horario || !local) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerText = 'Enviando...';
-
-        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
-        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
