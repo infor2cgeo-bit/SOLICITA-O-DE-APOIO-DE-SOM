@@ -158,12 +158,6 @@
             border-bottom: 3px solid var(--primary-red);
         }
 
-        button:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-            border-bottom: none;
-        }
-
         @media (max-width: 600px) {
             .form-row {
                 flex-direction: column;
@@ -177,10 +171,9 @@
 <div class="container">
     <header>
         <h1>Solicitação de Apoio: Som e Informática</h1>
-        <p class="subtitle">Preencha os dados abaixo para reservar equipamentos e suporte técnico para o seu evento.</p>
+        <p class="subtitle">Preencha os dados abaixo para gerar sua solicitação e enviar para nossa equipe via WhatsApp.</p>
     </header>
 
-    <!-- Forçamos o formulário a nunca disparar ações nativas de recarregamento -->
     <form id="solicitacaoForm" onsubmit="return false;">
         <div class="form-group">
             <label for="nome">Nome Completo</label>
@@ -265,18 +258,16 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <!-- Botão do tipo button impede qualquer recarregamento acidental do navegador -->
-        <button type="button" id="btnEnviar" onclick="dispararEnvio()">Enviar Solicitação</button>
+        <button type="button" id="btnEnviar" onclick="enviarWhatsApp()">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
-    const URL_PLANILHA = 'https://google.com';
+    // ⚠️ SUBSTITUA PELO NÚMERO DO WHATSAPP DA EQUIPE DE TI (Apenas números: Código do país 55 + DDD + Número)
+    const NUMERO_WHATSAPP = '5561999999999'; 
 
-    function dispararEnvio() {
-        const btn = document.getElementById('btnEnviar');
-        
-        // Coleta e validação manual estrita dos elementos para evitar quebras de carregamento
+    function enviarWhatsApp() {
+        // Coleta e validação simples dos campos obrigatórios
         const nome = document.getElementById('nome').value.trim();
         const setor = document.getElementById('setor').value.trim();
         const evento = document.getElementById('evento').value.trim();
@@ -284,5 +275,12 @@
         const horario = document.getElementById('horario').value;
         const local = document.getElementById('local').value;
 
-        // Se algum campo obrigatório estiver vazio, avisa o usuário e aborta sem mexer na página
         if (!nome || !setor || !evento || !data || !horario || !local) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        // Coleta os itens marcados nas caixas de seleção
+        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
+        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
+        const tecnico = document.getElementById('tecnico').value;
