@@ -164,6 +164,12 @@
             border-bottom: 3px solid var(--primary-red);
         }
 
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            border-bottom: none;
+        }
+
         @media (max-width: 600px) {
             .form-row {
                 flex-direction: column;
@@ -211,10 +217,10 @@
             <label for="local">Local do Evento</label>
             <select id="local" required>
                 <option value="">Selecione o local...</option>
-                <option value="auditorio_principal">Auditório Principal</option>
-                <option value="sala_reunioes_a">Sala de Reuniões A</option>
-                <option value="bloco_central">Pátio / Bloco Central</option>
-                <option value="outro">Outro (Especificar nas observações)</option>
+                <option value="Auditório Principal">Auditório Principal</option>
+                <option value="Sala de Reuniões A">Sala de Reuniões A</option>
+                <option value="Pátio / Bloco Central">Pátio / Bloco Central</option>
+                <option value="Outro">Outro (Especificar nas observações)</option>
             </select>
         </div>
 
@@ -222,13 +228,13 @@
             <label>Necessidades de Som</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="microfone_sem_fio"> Microfones Sem Fio
+                    <input type="checkbox" name="som" value="Microfones Sem Fio"> Microfones Sem Fio
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="caixas_som"> Caixas de Som Adicionais
+                    <input type="checkbox" name="som" value="Caixas de Som Adicionais"> Caixas de Som Adicionais
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="mesa_som"> Mesa de Som Dedicada
+                    <input type="checkbox" name="som" value="Mesa de Som Dedicada"> Mesa de Som Dedicada
                 </label>
             </div>
         </div>
@@ -237,16 +243,16 @@
             <label>Necessidades de Informática</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="projetor"> Projetor / Datashow
+                    <input type="checkbox" name="ti" value="Projetor / Datashow"> Projetor / Datashow
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="notebook"> Notebook para Apresentação
+                    <input type="checkbox" name="ti" value="Notebook para Apresentação"> Notebook para Apresentação
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="passador_slides"> Passador de Slides (Laser)
+                    <input type="checkbox" name="ti" value="Passador de Slides"> Passador de Slides (Laser)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="internet_cabo"> Ponto de Internet Cabeada
+                    <input type="checkbox" name="ti" value="Ponto de Internet Cabeada"> Ponto de Internet Cabeada
                 </label>
             </div>
         </div>
@@ -254,8 +260,8 @@
         <div class="form-group">
             <label for="tecnico">Necessita de Técnico no Local durante o evento?</label>
             <select id="tecnico" required>
-                <option value="nao">Não, apenas a montagem/testes iniciais</option>
-                <option value="sim">Sim, suporte durante todo o evento</option>
+                <option value="Não, apenas a montagem/testes iniciais">Não, apenas a montagem/testes iniciais</option>
+                <option value="Sim, suporte durante todo o evento">Sim, suporte durante todo o evento</option>
             </select>
         </div>
 
@@ -264,17 +270,26 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <button type="submit">Enviar Solicitação</button>
+        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
+    // Seu link do Google Apps Script inserido com sucesso
+    const URL_PLANILHA = 'https://script.google.com/macros/s/AKfycbwFqvwr9jSZ9KDfh9OvSfRecotA-kVA5iGpSHjMyi8smkLgILoztK3igm1u_aRoEvzq/exec';
+
     document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Solicitação enviada com sucesso! A equipe de TI/Som entrará em contato para confirmar a disponibilidade.');
-        this.reset();
-    });
-</script>
+        
+        const btn = document.getElementById('btnEnviar');
+        btn.disabled = true;
+        btn.innerText = 'Enviando...';
 
-</body>
-</html>
+        // Captura e formata itens marcados
+        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
+        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
+
+        const dadosFormulario = {
+            nome: document.getElementById('nome').value,
+            setor: document.getElementById('setor').value,
+            evento: document.getElementById('evento').value,
