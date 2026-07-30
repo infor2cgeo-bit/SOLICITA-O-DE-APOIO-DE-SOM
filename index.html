@@ -180,8 +180,8 @@
         <p class="subtitle">Preencha os dados abaixo para reservar equipamentos e suporte técnico para o seu evento.</p>
     </header>
 
-    <!-- O formulário agora gerencia o travamento nativo corretamente -->
-    <form id="solicitacaoForm">
+    <!-- Forçamos o formulário a nunca disparar ações nativas de recarregamento -->
+    <form id="solicitacaoForm" onsubmit="return false;">
         <div class="form-group">
             <label for="nome">Nome Completo</label>
             <input type="text" id="nome" required placeholder="Digite seu nome">
@@ -215,7 +215,7 @@
                 <option value="Auditório Principal">Auditório Principal</option>
                 <option value="Sala de Reuniões A">Sala de Reuniões A</option>
                 <option value="Pátio / Bloco Central">Pátio / Bloco Central</option>
-                <option value="Outro">Outro (Especificar nas observations)</option>
+                <option value="Outro">Outro (Especificar nas observações)</option>
             </select>
         </div>
 
@@ -265,27 +265,24 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <!-- Botão voltou a ser type="submit" para que as validações do navegador funcionem nativamente -->
-        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
+        <!-- Botão do tipo button impede qualquer recarregamento acidental do navegador -->
+        <button type="button" id="btnEnviar" onclick="dispararEnvio()">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
     const URL_PLANILHA = 'https://google.com';
 
-    // Captura o envio de forma limpa e automática direto pelo formulário
-    document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Impede fisicamente o recarregamento da página
-
+    function dispararEnvio() {
         const btn = document.getElementById('btnEnviar');
-        btn.disabled = true;
-        btn.innerText = 'Enviando...';
+        
+        // Coleta e validação manual estrita dos elementos para evitar quebras de carregamento
+        const nome = document.getElementById('nome').value.trim();
+        const setor = document.getElementById('setor').value.trim();
+        const evento = document.getElementById('evento').value.trim();
+        const data = document.getElementById('data').value;
+        const horario = document.getElementById('horario').value;
+        const local = document.getElementById('local').value;
 
-        // Organiza as caixas de som e TI marcadas
-        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
-        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
-
-        const dadosFormulario = {
-            nome: document.getElementById('nome').value,
-            setor: document.getElementById('setor').value,
-            evento: document.getElementById('evento').value,
+        // Se algum campo obrigatório estiver vazio, avisa o usuário e aborta sem mexer na página
+        if (!nome || !setor || !evento || !data || !horario || !local) {
