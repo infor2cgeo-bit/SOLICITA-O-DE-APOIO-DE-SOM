@@ -9,11 +9,14 @@
             --primary-blue: #2a75d3;
             --primary-red: #e63946;
             --bg-dark: #12161a;
-            --card-bg: #1e252b;
+            
+            /* Ajuste de transparência e cor do container principal */
+            --card-bg: rgba(25, 32, 41, 0.65); /* 65% de opacidade no tom escuro */
+            
             --text-light: #f1f3f5;
             --text-muted: #adb5bd;
-            --input-border: #343a40;
-            --input-bg: #2b323a;
+            --input-border: rgba(255, 255, 255, 0.1);
+            --input-bg: rgba(18, 22, 26, 0.6);
         }
 
         * {
@@ -24,8 +27,7 @@
         }
 
         body {
-            /* Caminho relativo ideal para quando os arquivos estão na mesma raiz do GitHub */
-            background-image: linear-gradient(rgba(18, 22, 26, 0.85), rgba(18, 22, 26, 0.85)), url('./fundo.jpg');
+            background-image: linear-gradient(rgba(12, 15, 19, 0.75), rgba(12, 15, 19, 0.75)), url('./fundo.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -39,15 +41,21 @@
             margin: 0 auto;
             background: var(--card-bg);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            
+            /* Efeito de desfoque estilo vidro para harmonizar com o fundo */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-top: 4px solid var(--primary-red);
         }
 
         header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid var(--bg-dark);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 20px;
         }
 
@@ -55,6 +63,7 @@
             color: var(--primary-blue);
             font-size: 24px;
             margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         p.subtitle {
@@ -92,15 +101,17 @@
             padding: 10px;
             background-color: var(--input-bg);
             border: 1px solid var(--input-border);
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 15px;
             color: var(--text-light);
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-blue);
+            background-color: rgba(18, 22, 26, 0.8);
+            box-shadow: 0 0 0 3px rgba(42, 117, 211, 0.2);
         }
 
         input::-webkit-calendar-picker-indicator {
@@ -108,9 +119,9 @@
         }
 
         .checkbox-group {
-            background: var(--bg-dark);
+            background: rgba(12, 15, 19, 0.4);
             padding: 15px;
-            border-radius: 4px;
+            border-radius: 6px;
             border: 1px solid var(--input-border);
         }
 
@@ -141,7 +152,7 @@
             color: white;
             padding: 14px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
