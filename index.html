@@ -180,8 +180,8 @@
         <p class="subtitle">Preencha os dados abaixo para reservar equipamentos e suporte técnico para o seu evento.</p>
     </header>
 
-    <!-- Removido o action e o método daqui para blindar contra recarregamentos -->
-    <form id="solicitacaoForm" onsubmit="return false;">
+    <!-- O formulário agora gerencia o travamento nativo corretamente -->
+    <form id="solicitacaoForm">
         <div class="form-group">
             <label for="nome">Nome Completo</label>
             <input type="text" id="nome" required placeholder="Digite seu nome">
@@ -215,7 +215,7 @@
                 <option value="Auditório Principal">Auditório Principal</option>
                 <option value="Sala de Reuniões A">Sala de Reuniões A</option>
                 <option value="Pátio / Bloco Central">Pátio / Bloco Central</option>
-                <option value="Outro">Outro (Especificar nas observações)</option>
+                <option value="Outro">Outro (Especificar nas observations)</option>
             </select>
         </div>
 
@@ -265,29 +265,27 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <!-- O tipo foi alterado para button para cortar o gatilho de recarregamento do HTML -->
-        <button type="button" id="btnEnviar" onclick="enviarDados()">Enviar Solicitação</button>
+        <!-- Botão voltou a ser type="submit" para que as validações do navegador funcionem nativamente -->
+        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
     const URL_PLANILHA = 'https://google.com';
 
-    function enviarDados() {
+    // Captura o envio de forma limpa e automática direto pelo formulário
+    document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Impede fisicamente o recarregamento da página
+
         const btn = document.getElementById('btnEnviar');
-        
-        // Validação manual simples dos campos obrigatórios já que o botão não é do tipo submit
-        const nome = document.getElementById('nome').value;
-        const setor = document.getElementById('setor').value;
-        const evento = document.getElementById('evento').value;
-        const data = document.getElementById('data').value;
-        const horario = document.getElementById('horario').value;
-        const local = document.getElementById('local').value;
-
-        if (!nome || !setor || !evento || !data || !horario || !local) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
-
         btn.disabled = true;
         btn.innerText = 'Enviando...';
+
+        // Organiza as caixas de som e TI marcadas
+        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
+        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
+
+        const dadosFormulario = {
+            nome: document.getElementById('nome').value,
+            setor: document.getElementById('setor').value,
+            evento: document.getElementById('evento').value,
