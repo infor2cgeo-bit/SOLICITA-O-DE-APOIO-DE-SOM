@@ -180,7 +180,8 @@
         <p class="subtitle">Preencha os dados abaixo para reservar equipamentos e suporte técnico para o seu evento.</p>
     </header>
 
-    <form id="solicitacaoForm">
+    <!-- Removido o action e o método daqui para blindar contra recarregamentos -->
+    <form id="solicitacaoForm" onsubmit="return false;">
         <div class="form-group">
             <label for="nome">Nome Completo</label>
             <input type="text" id="nome" required placeholder="Digite seu nome">
@@ -264,30 +265,29 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
+        <!-- O tipo foi alterado para button para cortar o gatilho de recarregamento do HTML -->
+        <button type="button" id="btnEnviar" onclick="enviarDados()">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
     const URL_PLANILHA = 'https://google.com';
 
-    document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
+    function enviarDados() {
         const btn = document.getElementById('btnEnviar');
+        
+        // Validação manual simples dos campos obrigatórios já que o botão não é do tipo submit
+        const nome = document.getElementById('nome').value;
+        const setor = document.getElementById('setor').value;
+        const evento = document.getElementById('evento').value;
+        const data = document.getElementById('data').value;
+        const horario = document.getElementById('horario').value;
+        const local = document.getElementById('local').value;
+
+        if (!nome || !setor || !evento || !data || !horario || !local) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
         btn.disabled = true;
         btn.innerText = 'Enviando...';
-
-        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
-        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
-
-        const dadosFormulario = {
-            nome: document.getElementById('nome').value,
-            setor: document.getElementById('setor').value,
-            evento: document.getElementById('evento').value,
-            data: document.getElementById('data').value,
-            horario: document.getElementById('horario').value,
-            local: document.getElementById('local').value,
-            som: somMarcados || 'Nenhum',
-            ti: tiMarcados || 'Nenhum',
-            tecnico: document.getElementById('tecnico').value,
