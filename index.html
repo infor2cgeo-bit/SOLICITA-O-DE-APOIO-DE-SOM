@@ -6,7 +6,6 @@
     <title>Solicitação de Apoio - TI & Som</title>
     <style>
         :root {
-            /* Paleta de cores em tons de azul, vermelho e modo escuro */
             --primary-blue: #2a75d3;
             --primary-red: #e63946;
             --bg-dark: #12161a;
@@ -25,8 +24,8 @@
         }
 
         body {
-            /* Substitua o texto abaixo pela URL ou caminho da sua imagem de fundo */
-            background-image: linear-gradient(rgba(18, 22, 26, 0.85), rgba(18, 22, 26, 0.85)), url('/home/paiva/Área de trabalho/GITCGEO/Papel de parede padrão 2cgeo.jpg');
+            /* Caminho relativo ideal para quando os arquivos estão na mesma raiz do GitHub */
+            background-image: linear-gradient(rgba(18, 22, 26, 0.85), rgba(18, 22, 26, 0.85)), url('./fundo.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -104,7 +103,6 @@
             border-color: var(--primary-blue);
         }
 
-        /* Ajuste para o ícone do calendário e relógio nativos no modo escuro */
         input::-webkit-calendar-picker-indicator {
             filter: invert(1);
         }
@@ -172,7 +170,6 @@
     </header>
 
     <form id="solicitacaoForm">
-        <!-- Dados do Solicitante -->
         <div class="form-group">
             <label for="nome">Nome Completo</label>
             <input type="text" id="nome" required placeholder="Digite seu nome">
@@ -183,7 +180,6 @@
             <input type="text" id="setor" required placeholder="Ex: RH, Marketing">
         </div>
 
-        <!-- Dados do Evento -->
         <div class="form-group">
             <label for="evento">Nome do Evento</label>
             <input type="text" id="evento" required placeholder="Ex: Palestra de Integração">
@@ -211,7 +207,6 @@
             </select>
         </div>
 
-        <!-- Necessidades de Som -->
         <div class="form-group">
             <label>Necessidades de Som</label>
             <div class="checkbox-group">
@@ -227,7 +222,6 @@
             </div>
         </div>
 
-        <!-- Necessidades de Informática -->
         <div class="form-group">
             <label>Necessidades de Informática</label>
             <div class="checkbox-group">
@@ -246,7 +240,6 @@
             </div>
         </div>
 
-        <!-- Presença de Técnico -->
         <div class="form-group">
             <label for="tecnico">Necessita de Técnico no Local durante o evento?</label>
             <select id="tecnico" required>
@@ -255,7 +248,6 @@
             </select>
         </div>
 
-        <!-- Observações -->
         <div class="form-group">
             <label for="obs">Observações ou Detalhes Adicionais</label>
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
@@ -275,4 +267,3 @@
 
 </body>
 </html>
-
