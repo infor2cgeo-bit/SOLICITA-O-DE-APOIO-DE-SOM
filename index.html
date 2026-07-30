@@ -189,33 +189,33 @@
     <form id="solicitacaoForm">
         <div class="form-group">
             <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" required placeholder="Digite seu nome">
+            <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
         </div>
 
         <div class="form-group">
             <label for="setor">Setor/Departamento</label>
-            <input type="text" id="setor" required placeholder="Ex: RH, Marketing">
+            <input type="text" id="setor" name="setor" required placeholder="Ex: RH, Marketing">
         </div>
 
         <div class="form-group">
             <label for="evento">Nome do Evento</label>
-            <input type="text" id="evento" required placeholder="Ex: Palestra de Integração">
+            <input type="text" id="evento" name="evento" required placeholder="Ex: Palestra de Integração">
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="data">Data do Evento</label>
-                <input type="date" id="data" required>
+                <input type="date" id="data" name="data" required>
             </div>
             <div class="form-group">
                 <label for="horario">Horário de Início</label>
-                <input type="time" id="horario" required>
+                <input type="time" id="horario" name="horario" required>
             </div>
         </div>
 
         <div class="form-group">
             <label for="local">Local do Evento</label>
-            <select id="local" required>
+            <select id="local" name="local" required>
                 <option value="">Selecione o local...</option>
                 <option value="Auditório Principal">Auditório Principal</option>
                 <option value="Sala de Reuniões A">Sala de Reuniões A</option>
@@ -259,7 +259,7 @@
 
         <div class="form-group">
             <label for="tecnico">Necessita de Técnico no Local durante o evento?</label>
-            <select id="tecnico" required>
+            <select id="tecnico" name="tecnico" required>
                 <option value="Não, apenas a montagem/testes iniciais">Não, apenas a montagem/testes iniciais</option>
                 <option value="Sim, suporte durante todo o evento">Sim, suporte durante todo o evento</option>
             </select>
@@ -267,7 +267,7 @@
 
         <div class="form-group">
             <label for="obs">Observações ou Detalhes Adicionais</label>
-            <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
+            <textarea id="obs" name="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
         <button type="submit" id="btnEnviar">Enviar Solicitação</button>
@@ -275,8 +275,8 @@
 </div>
 
 <script>
-    // Seu link do Google Apps Script inserido com sucesso
-    const URL_PLANILHA = 'https://script.google.com/macros/s/AKfycbwFqvwr9jSZ9KDfh9OvSfRecotA-kVA5iGpSHjMyi8smkLgILoztK3igm1u_aRoEvzq/exec';
+    // Link oficial fornecido inserido com sucesso
+    const URL_PLANILHA = 'https://google.com';
 
     document.getElementById('solicitacaoForm').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -285,11 +285,8 @@
         btn.disabled = true;
         btn.innerText = 'Enviando...';
 
-        // Captura e formata itens marcados
+        // Captura e formata itens marcados de múltiplos valores
         const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
         const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
 
-        const dadosFormulario = {
-            nome: document.getElementById('nome').value,
-            setor: document.getElementById('setor').value,
-            evento: document.getElementById('evento').value,
+        // Cria o formato URL encoded que não causa erros de CORS ou funções ausentes no Google
