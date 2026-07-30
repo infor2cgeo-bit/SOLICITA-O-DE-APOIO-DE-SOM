@@ -141,7 +141,7 @@
             accent-color: var(--primary-blue);
         }
 
-        button {
+        input[type="submit"] {
             width: 100%;
             background-color: var(--primary-blue);
             color: white;
@@ -152,17 +152,12 @@
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
+            text-transform: uppercase;
         }
 
-        button:hover {
+        input[type="submit"]:hover {
             background-color: #1a5bb5;
             border-bottom: 3px solid var(--primary-red);
-        }
-
-        button:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-            border-bottom: none;
         }
 
         @media (max-width: 600px) {
@@ -181,13 +176,13 @@
         <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de equipamentos e suporte para o evento.</p>
     </header>
 
-    <!-- Envio HTML nativo acoplado à API estável do Web3Forms com target isolado -->
-    <form id="solicitacaoForm" action="https://web3forms.com" method="POST" target="canal_invisivel">
+    <!-- Envio direto pelo navegador sem depender de códigos Javascript secundários -->
+    <form action="https://web3forms.com" method="POST">
         
-        <!-- ⚠️ SUBSTITUA O TEXTO ABAIXO PELA SUA CHAVE QUE VOCÊ COPIOU DO SITE WEB3FORMS -->
+        <!-- ⚠️ COLE A SUA CHAVE DO WEB3FORMS ABAIXO NO VALOR DO VALUE -->
         <input type="hidden" name="access_key" value="COLE_AQUI_A_SUA_CHAVE_DO_WEB3FORMS">
-        <input type="hidden" name="subject" value="Nova Solicitação de Apoio - Sistema de Chamados">
-        <input type="hidden" name="from_name" value="Formulário TI/Som">
+        <input type="hidden" name="subject" value="Nova Solicitação de Apoio de TI/Som">
+        <input type="hidden" name="from_name" value="Formulário do Site">
 
         <div class="form-group">
             <label for="nome">Nome de Guerra</label>
@@ -230,13 +225,13 @@
             <label>Necessidades de Som</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade Som (Microfone)" value="Microfones Sem Fio"> Microfones Sem Fio
+                    <input type="checkbox" name="Som: Microfone" value="Sim"> Microfones Sem Fio
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade Som (Caixa)" value="Caixas de Som"> Caixas de Som
+                    <input type="checkbox" name="Som: Caixas" value="Sim"> Caixas de Som
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade Som (Mesa)" value="Mesa de Som Dedicada"> Mesa de Som Dedicada
+                    <input type="checkbox" name="Som: Mesa" value="Sim"> Mesa de Som Dedicada
                 </label>
             </div>
         </div>
@@ -245,16 +240,16 @@
             <label>Necessidades de Informática</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade TI (Projetor)" value="Projetor"> Projetor
+                    <input type="checkbox" name="TI: Projetor" value="Sim"> Projetor
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade TI (Notebook)" value="Notebook para Apresentação"> Notebook para Apresentação
+                    <input type="checkbox" name="TI: Notebook" value="Sim"> Notebook para Apresentação
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade TI (Passador)" value="Passador de Slides"> Passador de Slides (Laser)
+                    <input type="checkbox" name="TI: Passador" value="Sim"> Passador de Slides (Laser)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Necessidade TI (Internet)" value="Ponto de Internet Cabeada"> Ponto de Internet Cabeada
+                    <input type="checkbox" name="TI: Internet" value="Sim"> Ponto de Internet Cabeada
                 </label>
             </div>
         </div>
@@ -272,12 +267,10 @@
             <textarea id="obs" name="Observações Adicionais" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <!-- Botão submit ativa obrigatoriamente a ação nativa e blindada do formulário -->
-        <button type="submit" id="btnEnviar">Enviar Solicitação</button>
+        <!-- Botão nativo puro do sistema operacional -->
+        <input type="submit" value="Enviar Solicitação">
     </form>
 </div>
 
-<!-- O iframe absorve a resposta da rede e impede o site principal de recarregar ou sair do lugar -->
-<iframe name="canal_invisivel" id="canal_invisivel" style="display:none;"></iframe>
-
-<script>
+</body>
+</html>
