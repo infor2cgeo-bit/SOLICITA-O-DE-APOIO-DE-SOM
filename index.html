@@ -58,6 +58,7 @@
             font-size: 24px;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-transform: uppercase; /* Altera estritamente o título principal para Caixa Alta */
         }
 
         p.subtitle {
@@ -176,13 +177,13 @@
 
     <form id="solicitacaoForm" onsubmit="return false;">
         <div class="form-group">
-            <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" required placeholder="Digite seu nome">
+            <label for="nome">Nome de Guerra</label>
+            <input type="text" id="nome" required placeholder="Digite seu nome de guerra">
         </div>
 
         <div class="form-group">
-            <label for="setor">Setor/Departamento</label>
-            <input type="text" id="setor" required placeholder="Ex: RH, Marketing">
+            <label for="setor">Seção</label>
+            <input type="text" id="setor" required placeholder="Ex: S1, S3, Almoxarifado">
         </div>
 
         <div class="form-group">
@@ -205,9 +206,9 @@
             <label for="local">Local do Evento</label>
             <select id="local" required>
                 <option value="">Selecione o local...</option>
-                <option value="Auditório Principal">Auditório Principal</option>
-                <option value="Sala de Reuniões A">Sala de Reuniões A</option>
-                <option value="Pátio / Bloco Central">Pátio / Bloco Central</option>
+                <option value="Auditório">Auditório</option>
+                <option value="Sala de Reunião">Sala de Reuniões</option>
+                <option value="Pátio de Formatura">Pátio de Formatura</option>
                 <option value="Outro">Outro (Especificar nas observações)</option>
             </select>
         </div>
@@ -219,7 +220,7 @@
                     <input type="checkbox" name="som" value="Microfones Sem Fio"> Microfones Sem Fio
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="som" value="Caixas de Som Adicionais"> Caixas de Som Adicionais
+                    <input type="checkbox" name="som" value="Caixas de Som"> Caixas de Som
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" name="som" value="Mesa de Som Dedicada"> Mesa de Som Dedicada
@@ -231,7 +232,7 @@
             <label>Necessidades de Informática</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="ti" value="Projetor / Datashow"> Projetor / Datashow
+                    <input type="checkbox" name="ti" value="Projetor"> Projetor
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" name="ti" value="Notebook para Apresentação"> Notebook para Apresentação
@@ -264,7 +265,6 @@
 
 <script>
     function processarFormulario() {
-        // Validação manual simples dos campos obrigatórios
         const nome = document.getElementById('nome').value.trim();
         const setor = document.getElementById('setor').value.trim();
         const evento = document.getElementById('evento').value.trim();
@@ -277,10 +277,7 @@
             return;
         }
 
-        // Exibe o alerta de sucesso na tela
         alert('Solicitação enviada com sucesso! A equipe de TI/Som analisará o seu pedido.');
-
-        // Reseta o formulário limpando todos os campos
         document.getElementById('solicitacaoForm').reset();
     }
 </script>
