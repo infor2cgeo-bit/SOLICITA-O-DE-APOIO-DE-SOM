@@ -171,7 +171,7 @@
 <div class="container">
     <header>
         <h1>Solicitação de Apoio: Som e Informática</h1>
-        <p class="subtitle">Preencha os dados abaixo para gerar sua solicitação e enviar para nossa equipe via WhatsApp.</p>
+        <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de equipamentos e suporte para o evento.</p>
     </header>
 
     <form id="solicitacaoForm" onsubmit="return false;">
@@ -258,16 +258,13 @@
             <textarea id="obs" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
         </div>
 
-        <button type="button" id="btnEnviar" onclick="enviarWhatsApp()">Enviar Solicitação</button>
+        <button type="button" id="btnEnviar" onclick="processarFormulario()">Enviar Solicitação</button>
     </form>
 </div>
 
 <script>
-    // ⚠️ SUBSTITUA PELO NÚMERO DO WHATSAPP DA EQUIPE DE TI (Apenas números: Código do país 55 + DDD + Número)
-    const NUMERO_WHATSAPP = '5561999999999'; 
-
-    function enviarWhatsApp() {
-        // Coleta e validação simples dos campos obrigatórios
+    function processarFormulario() {
+        // Validação manual simples dos campos obrigatórios
         const nome = document.getElementById('nome').value.trim();
         const setor = document.getElementById('setor').value.trim();
         const evento = document.getElementById('evento').value.trim();
@@ -276,11 +273,17 @@
         const local = document.getElementById('local').value;
 
         if (!nome || !setor || !evento || !data || !horario || !local) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
+            alert('Por favor, preencha todos os campos obrigatórios antes de enviar.');
             return;
         }
 
-        // Coleta os itens marcados nas caixas de seleção
-        const somMarcados = Array.from(document.querySelectorAll('input[name="som"]:checked')).map(el => el.value).join(', ');
-        const tiMarcados = Array.from(document.querySelectorAll('input[name="ti"]:checked')).map(el => el.value).join(', ');
-        const tecnico = document.getElementById('tecnico').value;
+        // Exibe o alerta de sucesso na tela
+        alert('Solicitação enviada com sucesso! A equipe de TI/Som analisará o seu pedido.');
+
+        // Reseta o formulário limpando todos os campos
+        document.getElementById('solicitacaoForm').reset();
+    }
+</script>
+
+</body>
+</html>
