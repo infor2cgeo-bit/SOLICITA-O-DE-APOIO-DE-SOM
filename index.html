@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitação de Serviço - Pelotão de Obras</title>
+    <title>Solicitação de Apoio - TI & Som</title>
     <style>
         :root {
             --primary-blue: #2a75d3;
             --primary-red: #e63946;
             --bg-dark: #12161a;
-            --card-bg: rgba(25, 32, 41, 0.75);
+            --card-bg: rgba(25, 32, 41, 0.65);
             --text-light: #f1f3f5;
             --text-muted: #adb5bd;
             --input-border: rgba(255, 255, 255, 0.1);
@@ -24,20 +24,23 @@
         }
 
         body {
-            min-height: 100vh;
-            overflow-y: auto; /* Força a barra de rolagem vertical caso o conteúdo passe da tela */
-            background-image: linear-gradient(rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0.8)), url('https://unsplash.com');
+            background-image: linear-gradient(rgba(12, 15, 19, 0.75), rgba(12, 15, 19, 0.75)), url('./fundo.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: var(--text-light);
             line-height: 1.6;
-            padding: 20px 20px 60px 20px; /* Margem extra de segurança no fundo da página */
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
+            width: 100%;
             max-width: 700px;
-            margin: 20px auto 40px auto;
+            margin: 0 auto;
             background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
@@ -91,8 +94,8 @@
 
         input[type="text"],
         input[type="date"],
-        select,
-        textarea {
+        input[type="time"],
+        select {
             width: 100%;
             padding: 10px;
             background-color: var(--input-bg);
@@ -103,7 +106,7 @@
             transition: all 0.3s;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--primary-blue);
             background-color: rgba(18, 22, 26, 0.8);
@@ -142,9 +145,7 @@
             accent-color: var(--primary-blue);
         }
 
-        /* Estilização dedicada para o Botão de Envio */
-        .btn-submit {
-            display: block;
+        input[type="submit"] {
             width: 100%;
             background-color: var(--primary-blue);
             color: white;
@@ -156,10 +157,10 @@
             cursor: pointer;
             transition: background 0.3s;
             text-transform: uppercase;
-            margin-top: 25px;
+            margin-top: 10px;
         }
 
-        .btn-submit:hover {
+        input[type="submit"]:hover {
             background-color: #1a5bb5;
             border-bottom: 3px solid var(--primary-red);
         }
@@ -176,92 +177,71 @@
 
 <div class="container">
     <header>
-        <h1>Solicitação de Serviço: Pelotão de Obras</h1>
-        <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de manutenção, reparo ou benfeitoria.</p>
+        <h1>Solicitação de Apoio: Som e Informática</h1>
+        <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de equipamentos e suporte para o evento.</p>
     </header>
 
-    <!-- Envio direto pelo navegador usando Web3Forms -->
-    <form action="https://web3forms.com" method="POST">
+    <!-- Substitua o link abaixo pela URL do seu Webhook gerado no Make -->
+    <form action="COLE_O_LINK_DO_MAKE_AQUI" method="POST">
         
-        <!-- ⚠️ SUBSTITUA O VALOR ABAIXO PELA SUA CHAVE DO WEB3FORMS -->
-        <input type="hidden" name="access_key" value="COLE_AQUI_A_SUA_CHAVE_DO_WEB3FORMS">
-        <input type="hidden" name="subject" value="Nova DIOP / Solicitação de Serviço de Obras">
-        <input type="hidden" name="from_name" value="Formulário Obras">
-        
-        <!-- Redirecionamento após o envio -->
-        <input type="hidden" name="redirect" value="https://seusite.com">
+        <input type="hidden" name="subject" value="Nova Solicitação de Apoio de TI/Som">
+        <input type="hidden" name="from_name" value="Formulário do Site">
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="pgrad">Posto / Graduação</label>
-                <select id="pgrad" name="Posto_Graduacao" required>
-                    <option value="">Selecione...</option>
-                    <option value="Oficial Superior">Oficial Superior</option>
-                    <option value="Oficial Subalterno/Intermediário">Oficial Sub/Interm</option>
-                    <option value="Subtenente/Sargento">Subtenente / Sargento</option>
-                    <option value="Cabo/Soldado">Cabo / Soldado</option>
-                    <option value="Civil">Civil / Servidor</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nome">Nome de Guerra</label>
-                <input type="text" id="nome" name="Nome de Guerra" required placeholder="Ex: Sgt Silva">
-            </div>
+        <div class="form-group">
+            <label for="nome">Nome de Guerra</label>
+            <input type="text" id="nome" name="Nome de Guerra" required placeholder="Digite seu nome de guerra">
+        </div>
+
+        <div class="form-group">
+            <label for="setor">Seção</label>
+            <input type="text" id="setor" name="Seção" required placeholder="Ex: S1, S3, Almoxarifado">
+        </div>
+
+        <div class="form-group">
+            <label for="evento">Nome do Evento</label>
+            <input type="text" id="evento" name="Nome do Evento" required placeholder="Ex: Palestra de Integração">
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label for="setor">Seção / Subunidade Solicitante</label>
-                <input type="text" id="setor" name="Seção Solicitante" required placeholder="Ex: 1ª Cia Fuz, S4, Pavilhão do Comando">
+                <label for="data">Data do Evento</label>
+                <input type="date" id="data" name="Data do Evento" required>
             </div>
             <div class="form-group">
-                <label for="contato">Ramal Interno / Ritex / Celular</label>
-                <input type="text" id="contato" name="Contato Solicitante" required placeholder="Ex: Ramal 2045 ou (61) 9xxxx-xxxx">
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="local">Local Exato da Manutenção</label>
-                <input type="text" id="local" name="Local Exato" required placeholder="Ex: Banheiro do Alojamento de Cabos">
-            </div>
-            <div class="form-group">
-                <label for="prioridade">Prioridade Estimada</label>
-                <select id="prioridade" name="Prioridade Urgência" required>
-                    <option value="Baixa">Baixa (Rotina / Melhoria)</option>
-                    <option value="Média">Média (Prejuízo parcial das funções)</option>
-                    <option value="Alta">Alta (Vazamento grave, risco estrutural)</option>
-                </select>
+                <label for="horario">Horário de Início</label>
+                <input type="time" id="horario" name="Horário de Início" required>
             </div>
         </div>
 
         <div class="form-group">
-            <label>Natureza do Serviço (Selecione todas que se aplicam)</label>
+            <label for="local">Local do Evento</label>
+            <select id="local" name="Local do Evento" required>
+                <option value="">Selecione o local...</option>
+                <option value="Auditório">Auditório</option>
+                <option value="Sala de Reunião">Sala de Reunião</option>
+                <option value="Pátio de Formatura">Pátio de Formatura</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Disponibilidade de Material (Necessidades de Som)</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Hidráulica" value="Sim"> Hidráulica (Vazamentos, pias, vasos sanitários, tubulações)
+                    <input type="checkbox" name="Som: Microfone" value="Sim"> Microfones Sem Fio
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Elétrica" value="Sim"> Elétrica (Disjuntores, fiação, lâmpadas queimadas, tomadas)
+                    <input type="checkbox" name="Som: Caixas" value="Sim"> Caixas de Som
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Alvenaria" value="Sim"> Alvenaria / Carpintaria (Reparo em paredes, portas, fechaduras)
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Pintura" value="Sim"> Pintura (Retoques, áreas internas ou externas)
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Ar-Condicionado)
+                    <input type="checkbox" name="Som: Mesa" value="Sim"> Mesa de Som Dedicada
                 </label>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="descricao">Descrição Detalhada do Problema</label>
-            <textarea id="descricao" name="Descrição do Problema" rows="5" required placeholder="Descreva detalhadamente o que precisa ser feito ou consertado (Ex: A torneira da pia esquerda está espanada e vazando sem parar)..."></textarea>
-        </div>
+        <input type="submit" value="Enviar Solicitação">
+    </form>
+</div>
 
-        <!-- Campo Informativo e de Envio Oculto Automatizado -->
-        <div class="form-group">
-            <label>Disponibilidade de Material</label>
-            <div class="checkbox-group" style="border-left: 4px solid var(--primary-red); background: rgba(230, 57, 70, 0.05);">
+</body>
+</html>
