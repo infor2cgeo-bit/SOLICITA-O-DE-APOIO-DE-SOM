@@ -9,7 +9,7 @@
             --primary-blue: #2a75d3;
             --primary-red: #e63946;
             --bg-dark: #12161a;
-            --card-bg: rgba(25, 32, 41, 0.75); /* Opacidade levemente aumentada para melhorar a leitura sobre o fundo */
+            --card-bg: rgba(25, 32, 41, 0.75);
             --text-light: #f1f3f5;
             --text-muted: #adb5bd;
             --input-border: rgba(255, 255, 255, 0.1);
@@ -24,19 +24,22 @@
         }
 
         body {
-            /* Imagem de fundo temática configurada via URL externa de alta resolução */
-            background-image: linear-gradient(rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0.8)), url('fundo.jpg');
+            /* Imagem de fundo temática configurada via URL externa */
+            background-image: linear-gradient(rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0.8)), url('https://unsplash.com');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: var(--text-light);
             line-height: 1.6;
             padding: 20px;
+            /* CORREÇÃO: Garante que o navegador permita rolagem vertical caso o conteúdo passe da tela */
+            overflow-y: auto; 
+            min-height: 100vh;
         }
 
         .container {
             max-width: 700px;
-            margin: 0 auto;
+            margin: 20px auto 60px auto; /* CORREÇÃO: Aumentada a margem inferior para o botão não sumir na borda */
             background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
@@ -153,6 +156,7 @@
             cursor: pointer;
             transition: background 0.3s;
             text-transform: uppercase;
+            margin-top: 10px;
         }
 
         input[type="submit"]:hover {
@@ -184,9 +188,8 @@
         <input type="hidden" name="subject" value="Nova DIOP / Solicitação de Serviço de Obras">
         <input type="hidden" name="from_name" value="Formulário Obras">
         
-        <!-- Redirecionamento após o envio (Substitua o link abaixo pela sua página de sucesso se aplicável) -->
+        <!-- Redirecionamento após o envio -->
         <input type="hidden" name="redirect" value="https://seusite.com">
-
         <div class="form-row">
             <div class="form-group">
                 <label for="pgrad">Posto / Graduação</label>
@@ -196,7 +199,8 @@
                     <option value="Subtenente/Sargento">Subtenente / Sargento</option>
                     <option value="Cabo">Cabo</option>
                      <option value="Soldado">Soldado</option>
-                   
+
+        
                 </select>
             </div>
             <div class="form-group">
@@ -247,7 +251,7 @@
                     <input type="checkbox" name="Serviço: Pintura" value="Sim"> Pintura (Retoques, áreas internas ou externas)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Ar-Condicionado)
+                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Air-Condicionado)
                 </label>
             </div>
         </div>
@@ -260,4 +264,3 @@
         <!-- Campo Informativo e de Envio Oculto Automatizado -->
         <div class="form-group">
             <label>Disponibilidade de Material</label>
-            <div class="checkbox-group" style="border-left: 4px solid var(--primary-red); background: rgba(230, 57, 70, 0.05);">
