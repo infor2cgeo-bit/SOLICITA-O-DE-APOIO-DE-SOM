@@ -9,7 +9,7 @@
             --primary-blue: #2a75d3;
             --primary-red: #e63946;
             --bg-dark: #12161a;
-            --card-bg: rgba(25, 32, 41, 0.65);
+            --card-bg: rgba(25, 32, 41, 0.75); /* Opacidade levemente aumentada para melhorar a leitura sobre o fundo */
             --text-light: #f1f3f5;
             --text-muted: #adb5bd;
             --input-border: rgba(255, 255, 255, 0.1);
@@ -24,7 +24,8 @@
         }
 
         body {
-            background-image: linear-gradient(rgba(12, 15, 19, 0.75), rgba(12, 15, 19, 0.75)), url('./fundo_obras.jpg');
+            /* Imagem de fundo temática configurada via URL externa de alta resolução */
+            background-image: linear-gradient(rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0.8)), url('fundo.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -183,7 +184,7 @@
         <input type="hidden" name="subject" value="Nova DIOP / Solicitação de Serviço de Obras">
         <input type="hidden" name="from_name" value="Formulário Obras">
         
-        <!-- Opção 1: Redirecionamento após o envio (Substitua o link abaixo pela sua página de sucesso) -->
+        <!-- Redirecionamento após o envio (Substitua o link abaixo pela sua página de sucesso se aplicável) -->
         <input type="hidden" name="redirect" value="https://seusite.com">
 
         <div class="form-row">
@@ -209,7 +210,6 @@
                 <label for="setor">Seção / Subunidade Solicitante</label>
                 <input type="text" id="setor" name="Seção Solicitante" required placeholder="Ex: 1ª Cia Fuz, S4, Pavilhão do Comando">
             </div>
-            <!-- Opção 2: Campo de Ramal / Telefone de Contato adicionado aqui -->
             <div class="form-group">
                 <label for="contato">Ramal Interno / Ritex / Celular</label>
                 <input type="text" id="contato" name="Contato Solicitante" required placeholder="Ex: Ramal 2045 ou (61) 9xxxx-xxxx">
@@ -261,4 +261,3 @@
         <div class="form-group">
             <label>Disponibilidade de Material</label>
             <div class="checkbox-group" style="border-left: 4px solid var(--primary-red); background: rgba(230, 57, 70, 0.05);">
-                <p style="font-size: 14px; color: var(--text-light); font-weight: 500;">
