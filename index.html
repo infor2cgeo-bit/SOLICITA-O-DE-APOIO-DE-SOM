@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitação de Apoio - TI & Som</title>
+    <title>Solicitação de Serviço - Pelotão de Obras</title>
     <style>
         :root {
             --primary-blue: #2a75d3;
@@ -24,7 +24,7 @@
         }
 
         body {
-            background-image: linear-gradient(rgba(12, 15, 19, 0.75), rgba(12, 15, 19, 0.75)), url('./fundo.jpg');
+            background-image: linear-gradient(rgba(12, 15, 19, 0.75), rgba(12, 15, 19, 0.75)), url('./fundo_obras.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -89,7 +89,6 @@
 
         input[type="text"],
         input[type="date"],
-        input[type="time"],
         select,
         textarea {
             width: 100%;
@@ -172,105 +171,94 @@
 
 <div class="container">
     <header>
-        <h1>Solicitação de Apoio: Som e Informática</h1>
-        <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de equipamentos e suporte para o evento.</p>
+        <h1>Solicitação de Serviço: Pelotão de Obras</h1>
+        <p class="subtitle">Preencha os dados abaixo para registrar seu pedido de manutenção, reparo ou benfeitoria.</p>
     </header>
 
-    <!-- Envio direto pelo navegador sem depender de códigos Javascript secundários -->
-    <form action="https://hook.us2.make.com/uhdaeeb7kb9q5hmtf1t5x3rwntxonij9">
+    <!-- Envio direto pelo navegador usando Web3Forms -->
+    <form action="https://web3forms.com" method="POST">
         
-        <!-- ⚠️ COLE A SUA CHAVE DO WEB3FORMS ABAIXO NO VALOR DO VALUE -->
+        <!-- ⚠️ SUBSTITUA O VALOR ABAIXO PELA SUA CHAVE DO WEB3FORMS -->
         <input type="hidden" name="access_key" value="COLE_AQUI_A_SUA_CHAVE_DO_WEB3FORMS">
-        <input type="hidden" name="subject" value="Nova Solicitação de Apoio de TI/Som">
-        <input type="hidden" name="from_name" value="Formulário do Site">
+        <input type="hidden" name="subject" value="Nova DIOP / Solicitação de Serviço de Obras">
+        <input type="hidden" name="from_name" value="Formulário Obras">
+        
+        <!-- Opção 1: Redirecionamento após o envio (Substitua o link abaixo pela sua página de sucesso) -->
+        <input type="hidden" name="redirect" value="https://seusite.com">
 
-        <div class="form-group">
-            <label for="nome">Nome de Guerra</label>
-            <input type="text" id="nome" name="Nome de Guerra" required placeholder="Digite seu nome de guerra">
-        </div>
-
-        <div class="form-group">
-            <label for="setor">Seção</label>
-            <input type="text" id="setor" name="Seção" required placeholder="Ex: S1, S3, Almoxarifado">
-        </div>
-
-        <div class="form-group">
-            <label for="evento">Nome do Evento</label>
-            <input type="text" id="evento" name="Nome do Evento" required placeholder="Ex: Palestra de Integração">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="pgrad">Posto / Graduação</label>
+                <select id="pgrad" name="Posto_Graduacao" required>
+                    <option value="">Selecione...</option>
+                    <option value="Oficial Superior">Oficial Superior</option>
+                    <option value="Oficial Subalterno/Intermediário">Oficial Sub/Interm</option>
+                    <option value="Subtenente/Sargento">Subtenente / Sargento</option>
+                    <option value="Cabo/Soldado">Cabo / Soldado</option>
+                    <option value="Civil">Civil / Servidor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nome">Nome de Guerra</label>
+                <input type="text" id="nome" name="Nome de Guerra" required placeholder="Ex: Sgt Silva">
+            </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label for="data">Data do Evento</label>
-                <input type="date" id="data" name="Data do Evento" required>
+                <label for="setor">Seção / Subunidade Solicitante</label>
+                <input type="text" id="setor" name="Seção Solicitante" required placeholder="Ex: 1ª Cia Fuz, S4, Pavilhão do Comando">
+            </div>
+            <!-- Opção 2: Campo de Ramal / Telefone de Contato adicionado aqui -->
+            <div class="form-group">
+                <label for="contato">Ramal Interno / Ritex / Celular</label>
+                <input type="text" id="contato" name="Contato Solicitante" required placeholder="Ex: Ramal 2045 ou (61) 9xxxx-xxxx">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="local">Local Exato da Manutenção</label>
+                <input type="text" id="local" name="Local Exato" required placeholder="Ex: Banheiro do Alojamento de Cabos">
             </div>
             <div class="form-group">
-                <label for="horario">Horário de Início</label>
-                <input type="time" id="horario" name="Horário de Início" required>
+                <label for="prioridade">Prioridade Estimada</label>
+                <select id="prioridade" name="Prioridade Urgência" required>
+                    <option value="Baixa">Baixa (Rotina / Melhoria)</option>
+                    <option value="Média">Média (Prejuízo parcial das funções)</option>
+                    <option value="Alta">Alta (Vazamento grave, risco estrutural)</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="local">Local do Evento</label>
-            <select id="local" name="Local do Evento" required>
-                <option value="">Selecione o local...</option>
-                <option value="Auditório">Auditório</option>
-                <option value="Sala de Reunião">Sala de Reunião</option>
-                <option value="Pátio de Formatura">Pátio de Formatura</option>
-                <option value="Outro">Outro (Especificar nas observações)</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Necessidades de Som</label>
+            <label>Natureza do Serviço (Selecione todas que se aplicam)</label>
             <div class="checkbox-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Som: Microfone" value="Sim"> Microfones Sem Fio
+                    <input type="checkbox" name="Serviço: Hidráulica" value="Sim"> Hidráulica (Vazamentos, pias, vasos sanitários, tubulações)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Som: Caixas" value="Sim"> Caixas de Som
+                    <input type="checkbox" name="Serviço: Elétrica" value="Sim"> Elétrica (Disjuntores, fiação, lâmpadas queimadas, tomadas)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Som: Mesa" value="Sim"> Mesa de Som Dedicada
+                    <input type="checkbox" name="Serviço: Alvenaria" value="Sim"> Alvenaria / Carpintaria (Reparo em paredes, portas, fechaduras)
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="Serviço: Pintura" value="Sim"> Pintura (Retoques, áreas internas ou externas)
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Ar-Condicionado)
                 </label>
             </div>
         </div>
 
         <div class="form-group">
-            <label>Necessidades de Informática</label>
-            <div class="checkbox-group">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="TI: Projetor" value="Sim"> Projetor
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="TI: Notebook" value="Sim"> Notebook para Apresentação
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="TI: Passador" value="Sim"> Passador de Slides (Laser)
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="TI: Internet" value="Sim"> Ponto de Internet Cabeada
-                </label>
-            </div>
+            <label for="descricao">Descrição Detalhada do Problema</label>
+            <textarea id="descricao" name="Descrição do Problema" rows="5" required placeholder="Descreva detalhadamente o que precisa ser feito ou consertado (Ex: A torneira da pia esquerda está espanada e vazando sem parar)..."></textarea>
         </div>
 
+        <!-- Campo Informativo e de Envio Oculto Automatizado -->
         <div class="form-group">
-            <label for="tecnico">Necessita de Técnico no Local durante o evento?</label>
-            <select id="tecnico" name="Necessita de Técnico" required>
-                <option value="Não, apenas a montagem/testes iniciais">Não, apenas a montagem/testes iniciais</option>
-                <option value="Sim, suporte durante todo o evento">Sim, suporte durante todo o evento</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="obs">Observações ou Detalhes Adicionais</label>
-            <textarea id="obs" name="Observações Adicionais" rows="4" placeholder="Descreva aqui outras necessidades específicas..."></textarea>
-        </div>
-
-        <!-- Botão nativo puro do sistema operacional -->
-        <input type="submit" value="Enviar Solicitação">
-    </form>
-</div>
-
-</body>
-</html>
+            <label>Disponibilidade de Material</label>
+            <div class="checkbox-group" style="border-left: 4px solid var(--primary-red); background: rgba(230, 57, 70, 0.05);">
+                <p style="font-size: 14px; color: var(--text-light); font-weight: 500;">
