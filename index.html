@@ -24,22 +24,20 @@
         }
 
         body {
-            /* Imagem de fundo temática configurada via URL externa */
+            min-height: 100vh;
+            overflow-y: auto; /* Força a barra de rolagem vertical caso o conteúdo passe da tela */
             background-image: linear-gradient(rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0.8)), url('https://unsplash.com');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: var(--text-light);
             line-height: 1.6;
-            padding: 20px;
-            /* CORREÇÃO: Garante que o navegador permita rolagem vertical caso o conteúdo passe da tela */
-            overflow-y: auto; 
-            min-height: 100vh;
+            padding: 20px 20px 60px 20px; /* Margem extra de segurança no fundo da página */
         }
 
         .container {
             max-width: 700px;
-            margin: 20px auto 60px auto; /* CORREÇÃO: Aumentada a margem inferior para o botão não sumir na borda */
+            margin: 20px auto 40px auto;
             background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
@@ -144,7 +142,9 @@
             accent-color: var(--primary-blue);
         }
 
-        input[type="submit"] {
+        /* Estilização dedicada para o Botão de Envio */
+        .btn-submit {
+            display: block;
             width: 100%;
             background-color: var(--primary-blue);
             color: white;
@@ -156,10 +156,10 @@
             cursor: pointer;
             transition: background 0.3s;
             text-transform: uppercase;
-            margin-top: 10px;
+            margin-top: 25px;
         }
 
-        input[type="submit"]:hover {
+        .btn-submit:hover {
             background-color: #1a5bb5;
             border-bottom: 3px solid var(--primary-red);
         }
@@ -190,17 +190,17 @@
         
         <!-- Redirecionamento após o envio -->
         <input type="hidden" name="redirect" value="https://seusite.com">
+
         <div class="form-row">
             <div class="form-group">
                 <label for="pgrad">Posto / Graduação</label>
                 <select id="pgrad" name="Posto_Graduacao" required>
                     <option value="">Selecione...</option>
                     <option value="Oficial Superior">Oficial Superior</option>
+                    <option value="Oficial Subalterno/Intermediário">Oficial Sub/Interm</option>
                     <option value="Subtenente/Sargento">Subtenente / Sargento</option>
-                    <option value="Cabo">Cabo</option>
-                     <option value="Soldado">Soldado</option>
-
-        
+                    <option value="Cabo/Soldado">Cabo / Soldado</option>
+                    <option value="Civil">Civil / Servidor</option>
                 </select>
             </div>
             <div class="form-group">
@@ -251,7 +251,7 @@
                     <input type="checkbox" name="Serviço: Pintura" value="Sim"> Pintura (Retoques, áreas internas ou externas)
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Air-Condicionado)
+                    <input type="checkbox" name="Serviço: Refrigeração" value="Sim"> Refrigeração (Manutenção / limpeza de Ar-Condicionado)
                 </label>
             </div>
         </div>
@@ -264,3 +264,4 @@
         <!-- Campo Informativo e de Envio Oculto Automatizado -->
         <div class="form-group">
             <label>Disponibilidade de Material</label>
+            <div class="checkbox-group" style="border-left: 4px solid var(--primary-red); background: rgba(230, 57, 70, 0.05);">
